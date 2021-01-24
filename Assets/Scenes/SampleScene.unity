@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 519420032}
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
+  - component: {fileID: 519420030}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -149,6 +150,20 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
+--- !u!114 &519420030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1df92c4c6a193c54e9e28b2ce28a051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0, z: -15}
+  lerpSpeed: 10
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -239,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseSpeed: 18
+  current: {fileID: 0}
 --- !u!212 &1259371023
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -299,7 +315,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1259371021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 96, y: 64, z: -0.255}
+  m_LocalPosition: {x: 128, y: 96, z: -0.326}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -458,11 +474,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MAP_SIZE: 16
   ITERATION_AMOUNT: 8
-  DIR_CHANCE: 16
+  DIR_CHANCE: 8
   DOOR_SPAWN_CHANCE: 20
   MIN_ROOM_AM: 3
   roomPrefab: {fileID: 1090067267912601738, guid: 9cf2fb57394f74d4995fc901a3d632e5, type: 3}
-  roomSize: {x: 12, y: 8}
+  roomSize: {x: 16, y: 12}
 --- !u!4 &1802580288
 Transform:
   m_ObjectHideFlags: 0

@@ -74,6 +74,12 @@ MonoBehaviour:
   e: 0
   s: 0
   w: 0
+  myPosition: {x: 0, y: 0}
+  doorPrefab: {fileID: 1536900886164213926, guid: f52f13027e8abd149857689e761d348a, type: 3}
+  doorN: {fileID: 0}
+  doorE: {fileID: 0}
+  doorS: {fileID: 0}
+  doorW: {fileID: 0}
 --- !u!1 &7752820832149543918
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour {
@@ -17,6 +18,7 @@ public class RoomGenerator : MonoBehaviour {
     public int MIN_ROOM_AM = 2;
 
     public GameObject roomPrefab;
+    
     public Vector2 roomSize = new Vector2(2, 2);
 
     private void Clear() { //Destroys all existing rooms
@@ -46,27 +48,48 @@ public class RoomGenerator : MonoBehaviour {
 
             for (int i = 0; i < ITERATION_AMOUNT; i++) {
                 IterateGeneration();
+                //yield return new WaitForSeconds(0.1f);
             }
 
             for (int i = 0; i < MAP_SIZE; i++) { //Spawn doors
                 for (int j = 0; j < MAP_SIZE; j++) {
-                    Doors(i, j);                   
+                    Doors(i, j);   
                 }
             }
 
+            //yield return new WaitForSeconds(0.1f);
             PthRooms(MAP_SIZE / 2, MAP_SIZE / 2);
 
 
-            for (int i = 0; i < MAP_SIZE; i++) { //Clears rooms that are not accessible
+            for (int i = 0; i < MAP_SIZE; i++) { //Clears rooms that are not accessible and generates the insides of those which are
                 for (int j = 0; j < MAP_SIZE; j++) {
                     if (mapLayout[i, j] != null && !mapLayout[i,j].IsAccessible()) {
+                        //yield return new WaitForSeconds(0.2f);
                         Destroy(mapLayout[i, j].gameObject);
                         mapLayout[i, j] = null;
                     }
                 }
             }
 
+            
+
             Debug.Log($"Finished generation task; Map consists of {GetRoomAmount()} rooms");
+        }
+
+        for (int i = 0; i < MAP_SIZE; i++) { 
+            for (int j = 0; j < MAP_SIZE; j++) {
+                if (mapLayout[i, j] != null) {
+                    mapLayout[i, j].GenerateRoomContent();
+                }
+            }
+        }
+
+        for (int i = 0; i < MAP_SIZE; i++) { 
+            for (int j = 0; j < MAP_SIZE; j++) {
+                if (mapLayout[i, j] != null) {
+                    mapLayout[i, j].UpdateDoors();
+                }
+            }
         }
     }
 
@@ -122,6 +145,7 @@ public class RoomGenerator : MonoBehaviour {
         }
 
         mapLayout[x, y] = Instantiate(roomPrefab, new Vector2(x * roomSize.x, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+        mapLayout[x, y].myPosition = new Vector2Int(x,y);
     }
 
     private void Doors(int x, int y) { //Spawns doors for a room
