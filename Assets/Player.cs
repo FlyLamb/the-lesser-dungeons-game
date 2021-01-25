@@ -19,6 +19,9 @@ public class Player : MonoBehaviour {
     private Vector3 inputVector;
     private Vector3 shootVector;
 
+    public float health = 100f;
+    public float maxHealth = 100f;
+
     public float shootDelay;
 
     private void Start() {
@@ -36,8 +39,8 @@ public class Player : MonoBehaviour {
             inputVector = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         };
 
-        control.Player.Movement.canceled += ctx => { 
-            inputVector = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y); 
+        control.Player.Movement.canceled += ctx => {
+            inputVector = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         };
 
         control.Player.Shooting.performed += ctx => {
@@ -47,6 +50,22 @@ public class Player : MonoBehaviour {
         control.Player.Shooting.canceled += ctx => {
             shootVector = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         };
+
+        current.OnPlayerEnter(this);
+    }
+
+    public void Damage(float dmg) {
+        health -= dmg; // TODO: apply modifiers like armor and defense or any other stats
+        if (health <= 0) {
+            Die();
+        }
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
+    }
+
+    public void Die() {
+        Application.Quit();
     }
 
     private void Update() {
@@ -54,10 +73,11 @@ public class Player : MonoBehaviour {
         rb.velocity = inputVector * baseSpeed;
 
         if (weapon != null && shootVector.magnitude > 0.1f && shootDelay <= 0) {
-            weapon.Shoot(this,transform.position, shootVector);
+            weapon.Shoot(this, transform.position, shootVector);
         }
 
-        if (shootDelay > 0)
+        if (shootDelay > 0) {
             shootDelay -= Time.deltaTime;
+        }
     }
 }

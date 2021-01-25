@@ -12,6 +12,7 @@ public class Room : MonoBehaviour {
     public GameObject enemyObject;
 
     protected List<GameObject> go;
+    public float enemy = 0;
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -32,6 +33,7 @@ public class Room : MonoBehaviour {
             Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, 0, -2));
         }
     }
+
 
     public bool HasAnyDoors() {
         return n || e || s || w;
@@ -96,14 +98,22 @@ public class Room : MonoBehaviour {
         
         for(int i = 0; i < Random.Range(0,10); i ++ ) {
             go.Add(Instantiate(enemyObject, transform.position + new Vector3(Random.Range(-6,6),0,Random.Range(-4,4)), Quaternion.identity));
+            if (go[i].GetComponent<Enemy>() != null) { go[i].GetComponent<Enemy>().roomIn = this;  enemy++; }
             go[i].SetActive(false);
         }
     }
 
     public virtual void OnPlayerEnter(Player p) {
         foreach (var item in go) {
-            item.SetActive(true);
+            if(item != null)
+                item.SetActive(true);
         }
     }
 
+    public virtual void OnPlayerLeave(Player p) {
+        foreach (var item in go) {
+            if (item != null)
+                item.SetActive(false);
+        }
+    }
 }

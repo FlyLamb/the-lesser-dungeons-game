@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public float health;
+    public Room roomIn;
 
     private void Update() {
         GetComponent<NavMeshAgent>().destination = Player.instance.transform.position;
@@ -21,6 +22,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void Die() {
+        roomIn.enemy--;
         Destroy(gameObject);
     }
 }
