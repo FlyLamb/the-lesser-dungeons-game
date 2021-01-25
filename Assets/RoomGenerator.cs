@@ -144,7 +144,7 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
-        mapLayout[x, y] = Instantiate(roomPrefab, new Vector2(x * roomSize.x, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+        mapLayout[x, y] = Instantiate(roomPrefab, new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
         mapLayout[x, y].myPosition = new Vector2Int(x,y);
     }
 

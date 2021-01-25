@@ -10,8 +10,10 @@ public class Door : MonoBehaviour
     public bool locked;
 
     private void OnTriggerEnter(Collider other) {
+        if (!other.gameObject.CompareTag("Player")) return;
         if(!locked) {
-            Player.instance.transform.position = otherSide.transform.position + (Vector3)(Vector2)(leadsTo - roomIn.myPosition);
+            Vector2 moveDirection = (Vector2)(roomIn.myPosition - leadsTo);
+            Player.instance.transform.position = otherSide.transform.position + new Vector3(-moveDirection.x, Player.instance.transform.position.y, -moveDirection.y);
             Player.instance.current = RoomGenerator.generator.mapLayout[leadsTo.x, leadsTo.y];
         }
     }

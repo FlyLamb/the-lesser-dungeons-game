@@ -20,11 +20,11 @@ public class Room : MonoBehaviour {
         }
 
         if (n) {
-            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, 2, 0));
+            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, 0, 2));
         }
 
         if (s) {
-            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, -2, 0));
+            Gizmos.DrawLine(transform.position, transform.position + new Vector3(0, 0, -2));
         }
     }
 
@@ -42,22 +42,22 @@ public class Room : MonoBehaviour {
 
     public void GenerateDoors() {
         if (n) {
-            doorN = Instantiate(doorPrefab, transform.position + new Vector3(0, 4, 0), Quaternion.Euler(0,0,0)).GetComponent<Door>();
+            doorN = Instantiate(doorPrefab, transform.position + new Vector3(0, 0, 4), Quaternion.Euler(0,0,0)).GetComponent<Door>();
             doorN.leadsTo = myPosition + new Vector2Int(0, 1);
             doorN.roomIn = this;
         }
         if (s) {
-            doorS = Instantiate(doorPrefab, transform.position + new Vector3(0, -4, 0), Quaternion.Euler(0, 0, 180)).GetComponent<Door>();
+            doorS = Instantiate(doorPrefab, transform.position + new Vector3(0, 0, -4), Quaternion.Euler(0, 180, 0)).GetComponent<Door>();
             doorS.leadsTo = myPosition + new Vector2Int(0, -1);
             doorS.roomIn = this;
         }
         if (e) {
-            doorE = Instantiate(doorPrefab, transform.position + new Vector3(6, 0, 0), Quaternion.Euler(0, 0, 90)).GetComponent<Door>();
+            doorE = Instantiate(doorPrefab, transform.position + new Vector3(6, 0, 0), Quaternion.Euler(0, 90, 0)).GetComponent<Door>();
             doorE.leadsTo = myPosition + new Vector2Int(1, 0);
             doorE.roomIn = this;
         }
         if (w) {
-            doorW = Instantiate(doorPrefab, transform.position + new Vector3(-6, 0, 0), Quaternion.Euler(0, 0, 270)).GetComponent<Door>();
+            doorW = Instantiate(doorPrefab, transform.position + new Vector3(-6, 0, 0), Quaternion.Euler(0, 270, 0)).GetComponent<Door>();
             doorW.leadsTo = myPosition + new Vector2Int(-1, 0);
             doorW.roomIn = this;
         }
