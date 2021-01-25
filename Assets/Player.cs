@@ -41,7 +41,6 @@ public class Player : MonoBehaviour {
         };
 
         control.Player.Shooting.performed += ctx => {
-            Debug.Log("shoot");
             shootVector = new Vector3(ctx.ReadValue<Vector2>().x, 0, ctx.ReadValue<Vector2>().y);
         };
 

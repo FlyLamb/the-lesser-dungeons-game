@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour {
     public float aliveTime;
+    public float damage;
 
     private void Start() {
         StartCoroutine(Life());
@@ -13,9 +14,14 @@ public class Bullet : MonoBehaviour {
         Destroy(gameObject);
     }
 
+    public void EnemyBullet() {
+        gameObject.layer = 7;
+    }
+
+
     private void OnCollisionEnter(Collision collision) {
         if(collision.collider.gameObject.CompareTag("Enemy")) {
-            //damage the enemy
+            collision.collider.GetComponent<Enemy>().Damage(damage);
         }
         Destroy(gameObject);
     }

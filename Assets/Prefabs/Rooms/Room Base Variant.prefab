@@ -80,6 +80,7 @@ MonoBehaviour:
   doorE: {fileID: 0}
   doorS: {fileID: 0}
   doorW: {fileID: 0}
+  enemyObject: {fileID: 6008538075264484636, guid: d539fc2b8b135414181a318c53b8ecfa, type: 3}
 --- !u!1 &1181662267673660385
 GameObject:
   m_ObjectHideFlags: 0

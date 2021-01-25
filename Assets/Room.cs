@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Room : MonoBehaviour {
@@ -7,6 +8,10 @@ public class Room : MonoBehaviour {
     public Vector2Int myPosition;
     public GameObject doorPrefab;
     public Door doorN, doorE, doorS, doorW;
+
+    public GameObject enemyObject;
+
+    protected List<GameObject> go;
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -38,6 +43,10 @@ public class Room : MonoBehaviour {
 
     public bool IsAccessible() {
         return isAccessible;
+    }
+
+    private void Awake() {
+        go = new List<GameObject>();
     }
 
     public void GenerateDoors() {
@@ -84,6 +93,17 @@ public class Room : MonoBehaviour {
 
     public virtual void GenerateRoomContent() {
         GenerateDoors();
+        
+        for(int i = 0; i < Random.Range(0,10); i ++ ) {
+            go.Add(Instantiate(enemyObject, transform.position + new Vector3(Random.Range(-6,6),0,Random.Range(-4,4)), Quaternion.identity));
+            go[i].SetActive(false);
+        }
+    }
+
+    public virtual void OnPlayerEnter(Player p) {
+        foreach (var item in go) {
+            item.SetActive(true);
+        }
     }
 
 }

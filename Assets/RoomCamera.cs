@@ -12,7 +12,7 @@ public class RoomCamera : MonoBehaviour {
 
 
 
-    private void Update() {
+    private void LateUpdate() {
         roomCenter = Vector3.Lerp(roomCenter,Player.instance.current.transform.position + offset,Time.deltaTime * lerpSpeed);
         transform.position = Vector3.Lerp(roomCenter, Player.instance.transform.position + offset, playerTracking);
         Quaternion qrot = Quaternion.Euler(90,0,0);
