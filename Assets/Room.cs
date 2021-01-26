@@ -9,10 +9,11 @@ public class Room : MonoBehaviour {
     public GameObject doorPrefab;
     public Door doorN, doorE, doorS, doorW;
 
-    public GameObject enemyObject;
 
     protected List<GameObject> go;
     public float enemy = 0;
+
+    protected GameObject[,] objTable;
 
     private void OnDrawGizmos() {
         Gizmos.color = Color.red;
@@ -53,7 +54,7 @@ public class Room : MonoBehaviour {
 
     public void GenerateDoors() {
         if (n) {
-            doorN = Instantiate(doorPrefab, transform.position + new Vector3(0, 0, 4), Quaternion.Euler(0,0,0)).GetComponent<Door>();
+            doorN = Instantiate(doorPrefab, transform.position + new Vector3(0, 0, 4), Quaternion.Euler(0, 0, 0)).GetComponent<Door>();
             doorN.leadsTo = myPosition + new Vector2Int(0, 1);
             doorN.roomIn = this;
         }
@@ -95,25 +96,52 @@ public class Room : MonoBehaviour {
 
     public virtual void GenerateRoomContent() {
         GenerateDoors();
-        
-        for(int i = 0; i < Random.Range(0,10); i ++ ) {
-            go.Add(Instantiate(enemyObject, transform.position + new Vector3(Random.Range(-6,6),0,Random.Range(-4,4)), Quaternion.identity));
-            if (go[i].GetComponent<Enemy>() != null) { go[i].GetComponent<Enemy>().roomIn = this;  enemy++; }
-            go[i].SetActive(false);
+        objTable = new GameObject[12, 8];
+        for (int x = -6; x < 6; x++) {
+            for (int y = -4; y < 4; y++) {
+                objTable[x+6,y+4] = GenCell(x, y, transform.position + new Vector3(x+0.5f,0,y + 0.5f),Random.Range(0,1000f));
+                go.Add(objTable[x + 6, y + 4]);
+            }
         }
+
+        if(s) {
+            Destroy(objTable[5, 0]);
+            Destroy(objTable[6, 0]);
+        }
+
+        if (n) {
+            Destroy(objTable[5, 7]);
+            Destroy(objTable[6, 7]);
+        }
+
+        if(e) {
+            Destroy(objTable[0, 3]);
+            Destroy(objTable[0, 4]);
+        }
+
+        if (w) {
+            Destroy(objTable[11, 3]);
+            Destroy(objTable[11, 4]);
+        }
+    }
+
+    public virtual GameObject GenCell(int x, int y, Vector3 ePos, float seed) {
+        return null;
     }
 
     public virtual void OnPlayerEnter(Player p) {
         foreach (var item in go) {
-            if(item != null)
+            if (item != null) {
                 item.SetActive(true);
+            }
         }
     }
 
     public virtual void OnPlayerLeave(Player p) {
         foreach (var item in go) {
-            if (item != null)
+            if (item != null) {
                 item.SetActive(false);
+            }
         }
     }
 }

@@ -23,6 +23,7 @@ public class Player : MonoBehaviour {
     public float maxHealth = 100f;
 
     public float shootDelay;
+    public PlayerAnimator animator;
 
     private void Start() {
         control = new PlayerControl();
@@ -69,7 +70,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-
+        
         rb.velocity = inputVector * baseSpeed;
 
         if (weapon != null && shootVector.magnitude > 0.1f && shootDelay <= 0) {
@@ -79,5 +80,7 @@ public class Player : MonoBehaviour {
         if (shootDelay > 0) {
             shootDelay -= Time.deltaTime;
         }
+
+        animator.Animate(rb.velocity,shootVector);
     }
 }
