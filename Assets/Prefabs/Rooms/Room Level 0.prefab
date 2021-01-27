@@ -81,7 +81,9 @@ MonoBehaviour:
   doorS: {fileID: 0}
   doorW: {fileID: 0}
   enemy: 0
-  destroyableCratePrefab: {fileID: 3463060360129752203, guid: 2a196b49d317d4b498cf0610e24e1a4c, type: 3}
+  destroyableCratePrefab: {fileID: 2190983541442041382, guid: 2a196b49d317d4b498cf0610e24e1a4c, type: 3}
+  enemies:
+  - {fileID: 204819076997713612, guid: 0261447781302e649ac73a8b2f3e7e06, type: 3}
   noiseScale: 0.4342123
 --- !u!1 &1181662267673660385
 GameObject:
@@ -383,7 +385,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.083333336
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 23800000, guid: ea8b351792807c04f81bb657e210ca8a, type: 2}
 --- !u!1001 &279746228638133723

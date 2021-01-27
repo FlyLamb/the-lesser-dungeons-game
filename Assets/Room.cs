@@ -10,7 +10,7 @@ public class Room : MonoBehaviour {
     public Door doorN, doorE, doorS, doorW;
 
 
-    protected List<GameObject> go;
+    public List<GameObject> go;
     public float enemy = 0;
 
     protected GameObject[,] objTable;
@@ -105,24 +105,26 @@ public class Room : MonoBehaviour {
         }
 
         if(s) {
-            Destroy(objTable[5, 0]);
-            Destroy(objTable[6, 0]);
+            Destroy(objTable[5, 0],0.1f);
+            Destroy(objTable[6, 0], 0.1f);
         }
 
         if (n) {
-            Destroy(objTable[5, 7]);
-            Destroy(objTable[6, 7]);
+            Destroy(objTable[5, 7], 0.1f);
+            Destroy(objTable[6, 7], 0.1f);
         }
 
         if(e) {
-            Destroy(objTable[0, 3]);
-            Destroy(objTable[0, 4]);
+            Destroy(objTable[0, 3], 0.1f);
+            Destroy(objTable[0, 4], 0.1f);
         }
 
         if (w) {
             Destroy(objTable[11, 3]);
             Destroy(objTable[11, 4]);
         }
+
+        
     }
 
     public virtual GameObject GenCell(int x, int y, Vector3 ePos, float seed) {
@@ -143,5 +145,14 @@ public class Room : MonoBehaviour {
                 item.SetActive(false);
             }
         }
+    }
+
+    public GameObject AddEntity(Entity e, Vector3 position, Quaternion rotation) {
+        GameObject g = Instantiate(e.gameObject, position, rotation);
+        g.GetComponent<Entity>().roomIn = this;
+        g.GetComponent<Entity>().OnRegister();
+        go.Add(g);
+        g.SetActive(false);
+        return g;
     }
 }

@@ -1,9 +1,13 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Entity : MonoBehaviour {
 
     public float health;
     public Room roomIn;
+
+    public virtual void OnRegister() {
+
+    }
 
     public virtual void Damage(float damage) {
         health -= damage;
@@ -14,7 +18,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public virtual void Die() {
-        roomIn.enemy--;
         Destroy(gameObject);
     }
+
 }

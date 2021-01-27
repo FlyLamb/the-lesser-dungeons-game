@@ -9,19 +9,19 @@ public class Bullet : MonoBehaviour {
         StartCoroutine(Life());
     }
 
-    private IEnumerator Life() {
+    protected virtual IEnumerator Life() {
         yield return new WaitForSeconds(aliveTime);
         Destroy(gameObject);
     }
 
     public void EnemyBullet() {
-        gameObject.layer = 7;
+        gameObject.layer = 9;
     }
 
 
     private void OnCollisionEnter(Collision collision) {
         if(collision.collider.gameObject.CompareTag("Enemy")) {
-            collision.collider.GetComponent<Enemy>().Damage(damage);
+            collision.collider.GetComponent<Entity>().Damage(damage);
         }
         Destroy(gameObject);
     }
