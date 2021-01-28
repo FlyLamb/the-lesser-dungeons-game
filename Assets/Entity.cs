@@ -1,6 +1,12 @@
 using UnityEngine;
 
 public class Entity : MonoBehaviour {
+    public enum DamageType {
+        normal,
+        fire,
+        poison,
+        water
+    }
 
     public float health;
     public Room roomIn;
@@ -9,7 +15,7 @@ public class Entity : MonoBehaviour {
 
     }
 
-    public virtual void Damage(float damage) {
+    public virtual void Damage(float damage, DamageType type = DamageType.normal) {
         health -= damage;
 
         if (health <= 0) {

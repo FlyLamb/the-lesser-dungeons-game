@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HostileEnemy : Entity
 {
+    
+
     protected float maxHealth;
     [SerializeField]
     protected HealthbarDisplay healthbar;
