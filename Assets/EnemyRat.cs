@@ -39,6 +39,7 @@ public class EnemyRat : HostileEnemy {
 
     private void Update() {
 
+        UpdateHealthDisplay();
         if (!gameObject.activeSelf) return;
 
         if (attack <= 0) {

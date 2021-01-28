@@ -6,6 +6,7 @@ public class PotionEffectCloud : MonoBehaviour {
 
     private void Start() {
         StartCoroutine(CloudLife());
+        transform.position += new Vector3(0, Random.Range(0, 1000f) / 100000f, 0);
     }
 
     private IEnumerator CloudLife() {

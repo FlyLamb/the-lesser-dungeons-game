@@ -16,6 +16,7 @@ public class EnemyTheDiseased : HostileEnemy {
     }
 
     private void Update() {
+        UpdateHealthDisplay();
         agent.SetDestination(Player.instance.transform.position);
 
         if (agent.remainingDistance < attackDistance && delay <= 0) {

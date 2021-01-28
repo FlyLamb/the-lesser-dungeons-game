@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6008538075264484625}
   - component: {fileID: 6008538075264484626}
   - component: {fileID: -5754020287483883495}
+  - component: {fileID: 7044903676624572598}
   m_Layer: 8
-  m_Name: Enemy Base 1
+  m_Name: The Diseased
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -134,7 +135,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   roomIn: {fileID: 0}
+  healthbar: {fileID: 7044903676624572598}
   attackDistance: 3
   projectile: {fileID: 6672106764619426609, guid: 7362da103b2b85e4fb37d20349529faf, type: 3}
   mDelay: 2
   throwForce: {x: 20, y: 20}
+--- !u!114 &7044903676624572598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6008538075264484636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08c9101c392fdd4f917ead6029c1d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarPrefab: {fileID: 4354960438310318249, guid: 39a2964fd251f7c479b0ecabb3671282, type: 3}
+  value: 0
+  offset: {x: 0, y: 2, z: 0}

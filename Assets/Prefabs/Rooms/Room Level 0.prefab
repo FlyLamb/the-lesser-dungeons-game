@@ -80,10 +80,11 @@ MonoBehaviour:
   doorE: {fileID: 0}
   doorS: {fileID: 0}
   doorW: {fileID: 0}
+  go: []
   enemy: 0
   destroyableCratePrefab: {fileID: 2190983541442041382, guid: 2a196b49d317d4b498cf0610e24e1a4c, type: 3}
   enemies:
-  - {fileID: 204819076997713612, guid: 0261447781302e649ac73a8b2f3e7e06, type: 3}
+  - {fileID: -5754020287483883495, guid: 5b952fd2059fde2418f3d84a86809212, type: 3}
   noiseScale: 0.4342123
 --- !u!1 &1181662267673660385
 GameObject:

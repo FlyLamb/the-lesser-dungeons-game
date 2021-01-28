@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 204819076997713601}
   - component: {fileID: 204819076997713612}
   - component: {fileID: 6008538073849997158}
+  - component: {fileID: 2381015976959262652}
   m_Layer: 8
   m_Name: Rat
   m_TagString: Enemy
@@ -47,7 +48,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.23
-  m_Speed: 2
+  m_Speed: 3
   m_Acceleration: 16
   avoidancePriority: 50
   m_AngularSpeed: 360
@@ -99,7 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 15
   roomIn: {fileID: 0}
+  healthbar: {fileID: 2381015976959262652}
   attack: 10
+  damage: 0
 --- !u!65 &6008538073849997158
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -113,6 +116,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.4, y: 1.06, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2381015976959262652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5887669635937323235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c08c9101c392fdd4f917ead6029c1d4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthbarPrefab: {fileID: 4354960438310318249, guid: 39a2964fd251f7c479b0ecabb3671282, type: 3}
+  value: 0
+  offset: {x: 0, y: 2, z: 0}
 --- !u!1001 &204819078007460638
 PrefabInstance:
   m_ObjectHideFlags: 0
