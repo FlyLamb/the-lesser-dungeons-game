@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useDelay: 0.3
   bullet: {fileID: 4001405395730967011, guid: 73ca23c488990fe488e4f0412320fb1d, type: 3}
-  bulletForce: 100
+  bulletForce: 50

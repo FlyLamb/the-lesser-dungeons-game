@@ -6,6 +6,7 @@ using UnityEngine;
 public class Weapon : ScriptableObject {
     public float useDelay = 1;
     public GameObject bullet;
+    public GameObject weaponModel;
     public float bulletForce;
 
     public virtual bool Shoot(Player player, Vector3 origin, Vector3 direction) {

@@ -33,6 +33,14 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Dpad"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""fda5b3a9-4004-4602-9e94-4f2c0bf73df7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -145,6 +153,17 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c3d3d2c5-f019-43f8-bd48-31b5c7606a35"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -155,6 +174,7 @@ public class @PlayerControl : IInputActionCollection, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Shooting = m_Player.FindAction("Shooting", throwIfNotFound: true);
+        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -206,12 +226,14 @@ public class @PlayerControl : IInputActionCollection, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Shooting;
+    private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
         private @PlayerControl m_Wrapper;
         public PlayerActions(@PlayerControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Shooting => m_Wrapper.m_Player_Shooting;
+        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -227,6 +249,9 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                 @Shooting.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShooting;
                 @Shooting.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShooting;
                 @Shooting.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnShooting;
+                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -237,6 +262,9 @@ public class @PlayerControl : IInputActionCollection, IDisposable
                 @Shooting.started += instance.OnShooting;
                 @Shooting.performed += instance.OnShooting;
                 @Shooting.canceled += instance.OnShooting;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -245,5 +273,6 @@ public class @PlayerControl : IInputActionCollection, IDisposable
     {
         void OnMovement(InputAction.CallbackContext context);
         void OnShooting(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

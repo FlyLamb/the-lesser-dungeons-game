@@ -84,6 +84,8 @@ MonoBehaviour:
   enemy: 0
   destroyableCratePrefab: {fileID: 2190983541442041382, guid: 2a196b49d317d4b498cf0610e24e1a4c, type: 3}
   enemies:
+  - {fileID: 204819076997713612, guid: 0261447781302e649ac73a8b2f3e7e06, type: 3}
+  - {fileID: 966472444928375616, guid: aeba8c7fd1d28124c997d150c36f0474, type: 3}
   - {fileID: 966472444928375616, guid: aeba8c7fd1d28124c997d150c36f0474, type: 3}
   noiseScale: 0.4342123
   poss: []
