@@ -93,8 +93,12 @@ public class Room : MonoBehaviour {
         }
     }
 
+    public virtual void Setup() {
+
+    }
 
     public virtual void GenerateRoomContent() {
+        
         GenerateDoors();
         objTable = new GameObject[12, 8];
         for (int x = -6; x < 6; x++) {
@@ -114,12 +118,12 @@ public class Room : MonoBehaviour {
             Destroy(objTable[6, 7], 0.1f);
         }
 
-        if(e) {
+        if(w) {
             Destroy(objTable[0, 3], 0.1f);
             Destroy(objTable[0, 4], 0.1f);
         }
 
-        if (w) {
+        if (e) {
             Destroy(objTable[11, 3]);
             Destroy(objTable[11, 4]);
         }

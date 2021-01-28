@@ -79,6 +79,7 @@ public class RoomGenerator : MonoBehaviour {
         for (int i = 0; i < MAP_SIZE; i++) { 
             for (int j = 0; j < MAP_SIZE; j++) {
                 if (mapLayout[i, j] != null) {
+                    mapLayout[i, j].Setup();
                     mapLayout[i, j].GenerateRoomContent();
                 }
             }

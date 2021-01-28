@@ -13,6 +13,7 @@ public class EnemyTheDiseased : HostileEnemy {
 
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
+        GetComponent<ModelAnimator>().Play(0);
     }
 
     private void Update() {
@@ -21,13 +22,22 @@ public class EnemyTheDiseased : HostileEnemy {
 
         if (agent.remainingDistance < attackDistance && delay <= 0) {
             GameObject bullet = Instantiate(projectile, transform.position, Quaternion.identity);
-            bullet.GetComponent<Rigidbody>().AddForce(transform.forward * throwForce.x + transform.up * throwForce.y);
+            bullet.GetComponent<Rigidbody>().AddForce((transform.forward * throwForce.x + transform.up * throwForce.y) * Random.Range(0.8f,1.3f));
             bullet.GetComponent<Bullet>().EnemyBullet();
             delay = mDelay;
+        }
+
+        if(agent.remainingDistance < agent.stoppingDistance + 1) {
+            transform.LookAt(Player.instance.transform.position);
         }
 
         if (delay >= 0) {
             delay -= Time.deltaTime;
         }
+    }
+
+    public override void Damage(float damage, DamageType type = DamageType.normal) {
+        if(type != DamageType.poison)
+            base.Damage(damage, type);
     }
 }

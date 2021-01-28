@@ -25,6 +25,8 @@ public class Player : MonoBehaviour {
     public float shootDelay;
     public PlayerAnimator animator;
 
+    private float poisonedTime = 0;
+
     private void Start() {
         control = new PlayerControl();
         control.Enable();
@@ -55,7 +57,7 @@ public class Player : MonoBehaviour {
         current.OnPlayerEnter(this);
     }
 
-    public void Damage(float dmg) {
+    public void Damage(float dmg, Entity.DamageType damageType = Entity.DamageType.normal) {
         health -= dmg; // TODO: apply modifiers like armor and defense or any other stats
         if (health <= 0) {
             Die();
@@ -63,6 +65,11 @@ public class Player : MonoBehaviour {
         if (health > maxHealth) {
             health = maxHealth;
         }
+    }
+
+    public void Effect(Entity.DamageType effect, float time) {
+        if(effect == Entity.DamageType.poison)
+            poisonedTime = time;
     }
 
     public void Die() {
@@ -80,7 +87,11 @@ public class Player : MonoBehaviour {
         if (shootDelay > 0) {
             shootDelay -= Time.deltaTime;
         }
-
+        if (poisonedTime >= 0) {
+            Damage(Time.deltaTime * 20, Entity.DamageType.poison);
+            poisonedTime -= Time.deltaTime;
+        }
+        
         animator.Animate(rb.velocity,shootVector);
     }
 }

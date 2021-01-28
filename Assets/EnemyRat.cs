@@ -32,7 +32,7 @@ public class EnemyRat : HostileEnemy {
         }
     }
 
-    public override void Damage(float damage) {
+    public override void Damage(float damage, DamageType type = DamageType.normal) {
         base.Damage(damage);
         attack = 0;
     }
