@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c28be2afa04f0a841b39de61ef67ceab, type: 3}
   m_Name: New Item Adrenaline
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  itemname: 
-  description: 
+  icon: {fileID: 21300000, guid: 38f5b8a26eb8eb64887d255e72264220, type: 3}
+  model: {fileID: 919132149155446097, guid: e0d3cb470a12ed64b937336e68aa0e63, type: 3}
+  itemname: Adrenaline
+  description: Giving up is not an option

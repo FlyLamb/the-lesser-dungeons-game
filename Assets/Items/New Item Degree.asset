@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804351be07210d045bdb2193551ef2a4, type: 3}
   m_Name: New Item Degree
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  itemname: 
-  description: 
+  icon: {fileID: 21300000, guid: dbbc6f9063456f34ebac6cc1b81c96a3, type: 3}
+  model: {fileID: 919132149155446097, guid: 769d48ab731304d4abdd2bedc886d5d5, type: 3}
+  itemname: Medicine Degree
+  description: Fire bad, Book good

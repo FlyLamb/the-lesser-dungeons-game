@@ -39,6 +39,13 @@ public class Crate : Entity {
         }
     }
 
+    public override void Damage(float damage, DamageType type = DamageType.normal) {
+        if (type == DamageType.poison) return;
+        else if (type == DamageType.fire) base.Damage(2 * damage,type);
+        else
+        base.Damage(damage, type);
+    }
+
     public override void Die() {
         wasDestroyed = true;
 

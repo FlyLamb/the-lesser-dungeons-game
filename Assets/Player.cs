@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
@@ -97,6 +98,7 @@ public class Player : MonoBehaviour {
         control.Player.Reload.performed += ctx => { Reload(); };
 
         current.OnPlayerEnter(this);
+        ApplyModifiers();
     }
 
     public WeaponPickupable DropWeapon() {
@@ -108,6 +110,14 @@ public class Player : MonoBehaviour {
     }
 
     public void Damage(float dmg, Entity.DamageType damageType = Entity.DamageType.normal) {
+
+
+        if (damageType == Entity.DamageType.normal) dmg -= md_baseResistance;
+        if (damageType == Entity.DamageType.poison) dmg -= md_poisonResistance;
+        if (damageType == Entity.DamageType.fire) dmg -= md_fireResistance;
+
+        dmg = Mathf.Clamp(dmg, 0, 1000);
+
         health -= dmg; // TODO: apply modifiers like armor and defense or any other stats
         if (health <= 0) {
             Die();
@@ -141,7 +151,7 @@ public class Player : MonoBehaviour {
     }
 
     public void Die() {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     private void Reload() {
@@ -187,7 +197,7 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-        ApplyModifiers();
+        
 
         shotBullet = false;
         rb.velocity = inputVector * md_speed;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74ca82db1b2f02b4d83bd9034ddfb8e4, type: 3}
   m_Name: New Item Fear
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
-  itemname: 
-  description: 
+  icon: {fileID: 21300000, guid: 423aa67f622ee7a47a0dc5d6bf3f3782, type: 3}
+  model: {fileID: 919132149155446097, guid: 1320cf3f0b51d824c82face0b98580d7, type: 3}
+  itemname: Fear
+  description: Oh god oh sh*t oh god oh sh*t!
