@@ -25,6 +25,8 @@ public class RoomGenerator : MonoBehaviour {
     public List<GameObject> startRoom;
 
     public List<r> roomPrefabs;
+
+    public int enemyAmount;
     
     public Vector2 roomSize = new Vector2(2, 2);
 

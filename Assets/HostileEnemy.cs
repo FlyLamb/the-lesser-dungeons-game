@@ -12,6 +12,7 @@ public class HostileEnemy : Entity
 
     public override void OnRegister() {
         roomIn.enemy++;
+        RoomGenerator.generator.enemyAmount++;
         maxHealth = health;
     }
 
@@ -22,5 +23,6 @@ public class HostileEnemy : Entity
 
     private void OnDestroy() {
         roomIn.enemy--;
+        RoomGenerator.generator.enemyAmount--;
     }
 }
