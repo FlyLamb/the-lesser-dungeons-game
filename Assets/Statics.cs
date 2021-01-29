@@ -6,7 +6,8 @@ public class Statics : MonoBehaviour
 {
     public static Statics instance;
     private void Awake() {
-        instance = this;
+        if(instance == null)
+            instance = this;
     }
 
 
@@ -14,5 +15,10 @@ public class Statics : MonoBehaviour
     public Sprite none;
     public GameObject ratParticles;
     public GameObject ammoPrefab;
+    public GameObject droppedItem;
+
+    public int mainSceneId = 0;
+
+    public int level = 0;
 
 }

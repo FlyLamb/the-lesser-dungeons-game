@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 804351be07210d045bdb2193551ef2a4, type: 3}
+  m_Name: New Item Degree
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: dbbc6f9063456f34ebac6cc1b81c96a3, type: 3}
+  model: {fileID: 919132149155446097, guid: 769d48ab731304d4abdd2bedc886d5d5, type: 3}
+  itemname: Medicine Degree
+  description: Fire bad, Book good

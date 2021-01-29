@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponChest : Entity {
 
     public float tierBase;
+    public List<Item> item;
 
     public List<LootTable> possibleDrops;
 
@@ -36,10 +37,16 @@ public class WeaponChest : Entity {
         yield return new WaitForSeconds(0.4f);
         wt.SetActive(true);
         yield return new WaitForSeconds(0.4f);
-        GameObject d = Instantiate(Statics.instance.dropWeaponPrefab, transform.position + new Vector3(Random.Range(-.6f, .6f), 1f, Random.Range(-.6f, .6f)), Quaternion.identity);
-        
-        
-        d.GetComponent<WeaponPickupable>().weapon = GetRandomWeapon();
-       
+        if(item.Count <= 0) { 
+            GameObject d = Instantiate(Statics.instance.dropWeaponPrefab, transform.position + new Vector3(Random.Range(-.6f, .6f), 1f, Random.Range(-.6f, .6f)), Quaternion.identity,transform);        
+            d.GetComponent<WeaponPickupable>().weapon = GetRandomWeapon();
+            d.GetComponent<Rigidbody>().AddExplosionForce(120, transform.position, 10);
+        }
+        else {
+            GameObject d = Instantiate(Statics.instance.droppedItem, transform.position + new Vector3(Random.Range(-.6f, .6f), 1f, Random.Range(-.6f, .6f)), Quaternion.identity, transform);
+            d.GetComponent<ItemPickupable>().item = item[Random.Range(0, item.Count)];
+            d.GetComponent<Rigidbody>().AddExplosionForce(120, transform.position, 10);
+        }
+
     }
 }

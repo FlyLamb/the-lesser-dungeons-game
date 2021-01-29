@@ -15,8 +15,20 @@ public class GameManager : MonoBehaviour
     
     public Slider healthBar, shootBar;
 
+    public RectTransform content;
+
+    public GameObject image;
+
+    private List<Image> spwnd;
+
+    private int bcount;
+
+    private Vector2 bsd ;
+
     private void Start() {
         player = Player.instance;
+        spwnd = new List<Image>();
+        bsd = content.sizeDelta;
     }
 
 
@@ -48,5 +60,19 @@ public class GameManager : MonoBehaviour
             shootBar.value = player.shootDelay / player.weapon.reloadTime;
         else
             shootBar.value = 1;
+
+        if (bcount != player.items.Count) {
+            foreach (Image d in spwnd) Destroy(d.gameObject);
+            spwnd.Clear();
+            content.sizeDelta = bsd;
+            for (int i = 0; i < player.items.Count; i++) {
+                content.sizeDelta += new Vector2(31, 0);
+                Image img = Instantiate(image, content.transform).GetComponent<Image>();
+                img.sprite = player.items[i].icon;
+                img.GetComponent<RectTransform>().anchoredPosition = new Vector3(84 * i + 50,0,0);
+                spwnd.Add(img);
+                bcount = player.items.Count;
+            }
+        }
     }
 }
