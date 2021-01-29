@@ -36,7 +36,7 @@ public class WeaponChest : Entity {
         yield return new WaitForSeconds(0.4f);
         wt.SetActive(true);
         yield return new WaitForSeconds(0.4f);
-        GameObject d = Instantiate(Statics.instance.dropWeaponPrefab, transform.position + new Vector3(Random.Range(-.6f, .6f), 1f, Random.Range(-.6f, .6f)), Quaternion.identity);
+        GameObject d = Instantiate(Statics.instance.dropWeaponPrefab, transform.position + new Vector3(Random.Range(-.6f, .6f), 1f, Random.Range(-.6f, .6f)), Quaternion.identity,transform);
         
         
         d.GetComponent<WeaponPickupable>().weapon = GetRandomWeapon();

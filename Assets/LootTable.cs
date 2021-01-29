@@ -1,7 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
+[CreateAssetMenu(menuName = "Game/Loot Table", fileName = "New LT")]
 public class LootTable : ScriptableObject {
     public List<LootItem> lootItems;
 
@@ -18,6 +21,7 @@ public class LootTable : ScriptableObject {
     }
 }
 
+[Serializable]
 public class LootItem {
     public float tierFrom, tierTo;
     public Weapon weapon;

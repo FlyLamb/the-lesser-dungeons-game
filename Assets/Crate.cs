@@ -43,7 +43,7 @@ public class Crate : Entity {
         wasDestroyed = true;
 
         if(Random.Range(0,100) < (Player.instance.md_luck) * luckM) {
-            Instantiate(Statics.instance.ammoPrefab,transform.position,Quaternion.identity);
+            Instantiate(Statics.instance.ammoPrefab,transform.position,Quaternion.identity,transform);
         }
 
         foreach(EnemyRat r in ratsInside) {

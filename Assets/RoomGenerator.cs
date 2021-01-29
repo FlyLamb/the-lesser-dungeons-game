@@ -1,7 +1,12 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomGenerator : MonoBehaviour {
+    [System.Serializable]
+    public class r {
+        public List<GameObject> g;
+    }
 
     public static RoomGenerator generator;
 
@@ -17,8 +22,9 @@ public class RoomGenerator : MonoBehaviour {
     public int DOOR_SPAWN_CHANCE = 50;
     public int MIN_ROOM_AM = 2;
 
-    public GameObject startRoom;
-    public GameObject[] roomPrefabs;
+    public List<GameObject> startRoom;
+
+    public List<r> roomPrefabs;
     
     public Vector2 roomSize = new Vector2(2, 2);
 
@@ -147,9 +153,9 @@ public class RoomGenerator : MonoBehaviour {
         }
 
         if(x == MAP_SIZE/2 && y == MAP_SIZE/2)
-            mapLayout[x, y] = Instantiate(startRoom, new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+            mapLayout[x, y] = Instantiate(startRoom[Statics.instance.level], new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
         else
-            mapLayout[x, y] = Instantiate(roomPrefabs[Random.Range(0,roomPrefabs.Length)], new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+            mapLayout[x, y] = Instantiate(roomPrefabs[Statics.instance.level].g[Random.Range(0,roomPrefabs[Statics.instance.level].g.Count)], new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
         mapLayout[x, y].myPosition = new Vector2Int(x,y);
     }
 
