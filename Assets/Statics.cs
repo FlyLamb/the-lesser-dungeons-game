@@ -11,4 +11,8 @@ public class Statics : MonoBehaviour
 
 
     public GameObject dropWeaponPrefab;
+    public Sprite none;
+    public GameObject ratParticles;
+    public GameObject ammoPrefab;
+
 }

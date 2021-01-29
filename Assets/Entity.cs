@@ -10,6 +10,7 @@ public class Entity : MonoBehaviour {
 
     public float health;
     public Room roomIn;
+    public Vector2Int cellpos;
 
     public virtual void OnRegister() {
 

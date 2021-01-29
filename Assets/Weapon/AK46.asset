@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26934fcc0ab78694d9aa078768f5e9db, type: 3}
+  m_Name: AK46
+  m_EditorClassIdentifier: 
+  useDelay: 0.1
+  bullet: {fileID: 4001405395730967011, guid: 73ca23c488990fe488e4f0412320fb1d, type: 3}
+  weaponModel: {fileID: 919132149155446097, guid: 5d677e86486aed246ac4dd4d95102af8, type: 3}
+  bulletForce: 100
+  magazineSize: 30
+  reloadTime: 2
+  icon: {fileID: 21300000, guid: 4bcd93e038ef58843a16c1518b9862b7, type: 3}
+  description: 'This legally distinct, totally not popular russian  machine gun can
+    do some real damage!
+
+'

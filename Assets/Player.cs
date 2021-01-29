@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour {
@@ -13,7 +14,7 @@ public class Player : MonoBehaviour {
     public Room current;
     public PlayerControl control;
 
-    public Weapon weapon;
+    public Weapon weapon, secondary;
 
     private Rigidbody rb;
 
@@ -25,18 +26,35 @@ public class Player : MonoBehaviour {
     public float health = 100f;
     public float maxHealth = 100f;
 
+    public float md_maxHealth;
+    public float md_poisonResistance;
+    public float md_fireResistance;
+    public float md_baseResistance;
+    public float md_speed;
+    public float md_luck;
+
+    [HideInInspector]
     public float shootDelay;
     public PlayerAnimator animator;
 
     private float poisonedTime = 0;
 
+    [HideInInspector]
     public bool interactHeld = false;
+    [HideInInspector]
     public bool shotBullet;
+
+    public int ammo = 100;
+    [HideInInspector]
+    public int ammoS1, ammoS2;
+
+    public List<Item> items;
+
 
     private void Start() {
         control = new PlayerControl();
         control.Enable();
-
+        items = new List<Item>();
         rb = GetComponent<Rigidbody>();
         RoomGenerator.generator.Generate();
         current = RoomGenerator.generator.mapLayout[
@@ -67,11 +85,20 @@ public class Player : MonoBehaviour {
             interactHeld = false;
         };
 
+        control.Player.SwitchWeapon.performed += ctx => {
+            if (shootDelay <= 0) {
+                SwitchWeapons();
+            }
+        };
+
+        control.Player.Reload.performed += ctx => { Reload(); };
+
         current.OnPlayerEnter(this);
     }
 
     public WeaponPickupable DropWeapon() {
-        GameObject g = Instantiate(Statics.instance.dropWeaponPrefab,transform.position + new Vector3(0,2,0),Quaternion.identity);
+        GameObject g = Instantiate(Statics.instance.dropWeaponPrefab, transform.position + new Vector3(Random.Range(-.5f, .5f), .5f, Random.Range(-.5f, .5f)), Quaternion.identity);
+        g.GetComponent<Rigidbody>().AddExplosionForce(50, transform.position, 4);
         g.GetComponent<WeaponPickupable>().weapon = weapon;
         weapon = null;
         return g.GetComponent<WeaponPickupable>();
@@ -88,21 +115,89 @@ public class Player : MonoBehaviour {
     }
 
     public void Effect(Entity.DamageType effect, float time) {
-        if(effect == Entity.DamageType.poison)
+        if (effect == Entity.DamageType.poison) {
             poisonedTime = time;
+        }
+    }
+
+    public void SetWeapon(Weapon w) {
+        weapon = w;
+        ammo += ammoS1;
+        ammoS1 = 0;
+
+    }
+
+    private void SwitchWeapons() {
+        Weapon w = weapon;
+        int tam = ammoS1;
+        SetWeapon(secondary);
+        ammoS1 = ammoS2;
+        secondary = w;
+        ammoS2 = tam;
+        ammo -= tam;
     }
 
     public void Die() {
         Application.Quit();
     }
 
+    private void Reload() {
+        if (weapon == null || ammo <= 0) {
+            return;
+        }
+        ammo += ammoS1;
+        shootDelay = weapon.reloadTime;
+        if (ammo > weapon.magazineSize) {
+            ammoS1 = weapon.magazineSize;
+            ammo -= weapon.magazineSize;
+        } else {
+            ammoS1 = ammo;
+            ammo = 0;
+        }
+    }
+
+    private void ApplyModifiers() {
+        md_baseResistance = 0;
+        md_fireResistance = 0;
+        md_poisonResistance = 0;
+        md_speed = baseSpeed;
+        md_maxHealth = 100;
+        md_luck = 1;
+
+        foreach (Item i in items) {
+            i.ApplyAddStats();
+        }
+
+        foreach (Item i in items) {
+            i.ApplyMultiplyStats();
+        }
+    }
+
+    public void AddItem(Item i) {
+        items.Add(i);
+        ApplyModifiers();
+    }
+
+    public void RemoveItem(Item i) {
+        items.Remove(i);
+        ApplyModifiers();
+    }
+
     private void Update() {
+        ApplyModifiers();
+
         shotBullet = false;
-        rb.velocity = inputVector * baseSpeed;
+        rb.velocity = inputVector * md_speed;
 
         if (weapon != null && shootVector.magnitude > 0.1f && shootDelay <= 0) {
-            shotBullet = true;
-            weapon.Shoot(this, transform.position, shootVector);
+            if (ammoS1 <= 0) {
+                Reload();
+            } else {
+                shotBullet = true;
+                weapon.Shoot(this, transform.position, shootVector);
+                ammoS1--;
+            }
+
         }
 
         if (shootDelay > 0) {
@@ -112,7 +207,7 @@ public class Player : MonoBehaviour {
             Damage(Time.deltaTime * 20, Entity.DamageType.poison);
             poisonedTime -= Time.deltaTime;
         }
-        
-        animator.Animate(rb.velocity,shootVector);
+
+        animator.Animate(rb.velocity, shootVector);
     }
 }

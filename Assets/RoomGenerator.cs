@@ -17,7 +17,8 @@ public class RoomGenerator : MonoBehaviour {
     public int DOOR_SPAWN_CHANCE = 50;
     public int MIN_ROOM_AM = 2;
 
-    public GameObject roomPrefab;
+    public GameObject startRoom;
+    public GameObject[] roomPrefabs;
     
     public Vector2 roomSize = new Vector2(2, 2);
 
@@ -145,7 +146,10 @@ public class RoomGenerator : MonoBehaviour {
             return;
         }
 
-        mapLayout[x, y] = Instantiate(roomPrefab, new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+        if(x == MAP_SIZE/2 && y == MAP_SIZE/2)
+            mapLayout[x, y] = Instantiate(startRoom, new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
+        else
+            mapLayout[x, y] = Instantiate(roomPrefabs[Random.Range(0,roomPrefabs.Length)], new Vector3(x * roomSize.x, 0, y * roomSize.y), Quaternion.identity).GetComponent<Room>();
         mapLayout[x, y].myPosition = new Vector2Int(x,y);
     }
 

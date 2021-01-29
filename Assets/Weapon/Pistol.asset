@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useDelay: 0.3
   bullet: {fileID: 4001405395730967011, guid: 73ca23c488990fe488e4f0412320fb1d, type: 3}
-  weaponModel: {fileID: 0}
+  weaponModel: {fileID: 919132149155446097, guid: 3dbe1b6708b4c734d8e3d0d124ee51eb, type: 3}
   bulletForce: 25
+  magazineSize: 16
+  reloadTime: 2
+  icon: {fileID: 21300000, guid: 280426705ef594340aa1c8df231fd44a, type: 3}
+  description: NGL, pretty useless weapon. What are you gonna kill with it? A rat?
