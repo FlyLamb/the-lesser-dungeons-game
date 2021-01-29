@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LevelElevator : MonoBehaviour
 {
+
+    private void Update() {
+        GetComponent<BoxCollider>().enabled = RoomGenerator.generator.enemyAmount <= 1;
+        GetComponent<MeshRenderer>().enabled = RoomGenerator.generator.enemyAmount <= 1;
+    }
+
     private void OnTriggerEnter(Collider other) {
         if (!other.CompareTag("Player")) return;
         Statics.instance.level++;
