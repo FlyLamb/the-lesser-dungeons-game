@@ -41,7 +41,7 @@ public class EnemyRat : HostileEnemy {
 
         UpdateHealthDisplay();
         if (!gameObject.activeSelf) return;
-
+        
         if (attack <= 0) {
             agent.SetDestination(Player.instance.transform.position);
             if(Vector3.Distance(Player.instance.transform.position,transform.position) < 0.5f) {
@@ -50,7 +50,7 @@ public class EnemyRat : HostileEnemy {
             }
         } else {
             if (nest == null) FindNest();
-            if (nest.wasDestroyed) FindNest();
+            if (nest.wasDestroyed || agent.isPathStale) FindNest();
             agent.SetDestination(nest.transform.position);
             attack -= Time.deltaTime;
             float dst = Vector3.Distance(nest.transform.position, transform.position);

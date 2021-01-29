@@ -18,7 +18,7 @@ public class EnemySpider : HostileEnemy {
 
     private void Update() {
         UpdateHealthDisplay();
-        if (Vector3.Distance(Player.instance.transform.position, transform.position) < 0.4f) {
+        if (Vector3.Distance(Player.instance.transform.position, transform.position) < 0.6f) {
             if(!entered)
                 Player.instance.Damage(damage);
             entered = true;

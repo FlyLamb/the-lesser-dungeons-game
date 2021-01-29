@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class PlayerAnimator : MonoBehaviour {
-    private ModelAnimator animator;
+    public ModelAnimator animator;
     private void Start() {
         animator = GetComponent<ModelAnimator>();
     }

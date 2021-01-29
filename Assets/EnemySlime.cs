@@ -17,10 +17,12 @@ public class EnemySlime : HostileEnemy {
         UpdateHealthDisplay();
         travelled += Vector3.Distance(transform.position, pPos);
 
-        if(travelled >= 2) {
+        if(travelled >= .6f) {
             GameObject g = Instantiate(poisonSplatterPrefab, new Vector3(transform.position.x, 0, transform.position.z), Quaternion.identity);
             g.transform.localScale *= .5f;
+            g.GetComponent<PotionEffectCloud>().desiredSize = .5f;
             g.GetComponent<PotionEffectCloud>().preDissapear = 6;
+            Destroy(g.transform.Find("break particle").gameObject);
             travelled = 0;
         }
 

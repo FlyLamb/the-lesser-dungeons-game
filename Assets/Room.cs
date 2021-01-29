@@ -105,6 +105,8 @@ public class Room : MonoBehaviour {
             for (int y = -4; y < 4; y++) {
                 objTable[x+6,y+4] = GenCell(x, y, transform.position + new Vector3(x+0.5f,0,y + 0.5f),Random.Range(0,1000f));
                 go.Add(objTable[x + 6, y + 4]);
+                if(objTable[x + 6, y + 4] != null && objTable[x + 6, y + 4].GetComponent<Entity>() != null)
+                    objTable[x + 6, y + 4].GetComponent<Entity>().cellpos = new Vector2Int(x+6,y+4);
             }
         }
 

@@ -14,4 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useDelay: 0.3
   bullet: {fileID: 4001405395730967011, guid: 73ca23c488990fe488e4f0412320fb1d, type: 3}
-  bulletForce: 100
+  weaponModel: {fileID: 0}
+  bulletForce: 50
+  magazineSize: 16
+  reloadTime: 2
+  icon: {fileID: 0}
+  description: 
